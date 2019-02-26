@@ -1,29 +1,22 @@
 const chokidar = require('chokidar');
 const net = require('net');
+const stream = require('stream');
+const ChangeStream = require('./streams/change-stream');
 let options = {
 
 };
-let listeners = [];
+let port = 8124;
+let cStream = new ChangeStream();
 let server = net.createServer((c)=> {
     console.log('client connected');
     c.on('end', () => {
         console.log('client disconnected');
     });
-    listeners.push(c);
-
+    cStream.pipe(c);
 });
 
-server.listen(8124, () => {
+server.listen(port, () => {
     console.log('server bound');
+    // listen to preferred
 });
-let connection = net.createConnection({ port: 8124 });
-chokidar.watch('.', {}).on('all', (event, path) => {
-    let result = {
-        event: event,
-        path: path
-    };
-    let jsonResult = JSON.stringify(result);
-    for(let listener of listeners){
-        listener.write(jsonResult + '\r\n');
-    }
-});
+let connection = net.createConnection({ port: port });
