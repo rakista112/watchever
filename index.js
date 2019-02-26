@@ -1,6 +1,7 @@
 const chokidar = require('chokidar');
 const net = require('net');
 const stream = require('stream');
+const commander = require('commander');
 const ChangeStream = require('./streams/change-stream');
 let options = {
 
@@ -19,4 +20,3 @@ server.listen(port, () => {
     console.log('server bound');
     // listen to preferred
 });
-let connection = net.createConnection({ port: port });

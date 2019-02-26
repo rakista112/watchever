@@ -15,6 +15,7 @@
   "author": "Ray Alovera <rakista112@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "chokidar": "^2.1.2"
+    "chokidar": "^2.1.2",
+    "commander": "^2.19.0"
   }
 }

@@ -1,6 +1,7 @@
 const { Readable } = require('stream');
 const chokidar = require('chokidar');
 
+// TODO: check listener for path, if different from existing paths, create another watcher
 class ChangeStream extends Readable {
     constructor(options){
         super(options)
