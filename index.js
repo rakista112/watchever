@@ -3,10 +3,13 @@ const net = require('net');
 const stream = require('stream');
 const commander = require('commander');
 const ChangeStream = require('./streams/change-stream');
-let options = {
+let options = {};
 
-};
-let port = 8124;
+commander.version('0.0.1')
+    .option('-p, --port [port]', 'choose port')
+    .parse(process.argv);
+let cPort = commander.port;
+console.log('port is ' + cPort);
 let cStream = new ChangeStream();
 let server = net.createServer((c)=> {
     console.log('client connected');
@@ -16,7 +19,7 @@ let server = net.createServer((c)=> {
     cStream.pipe(c);
 });
 
-server.listen(port, () => {
+server.listen(cPort, () => {
     console.log('server bound');
     // listen to preferred
 });
