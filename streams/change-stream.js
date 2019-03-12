@@ -11,8 +11,8 @@ class ChangeStream extends Readable {
                 event: event,
                 path: path
             };
-            let jsonResult = JSON.stringify(result);
-            self.push(jsonResult + '\r\n');
+            let jsonResult = JSON.stringify(result) + '\r\n';
+            self.push(jsonResult);
         });
     }
 
